@@ -6,7 +6,13 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Home from "./components/home/homePage";
 import Productlandingpage from "./components/products/productPage";
+import {
+  ThemeProvider,
+  createMuiTheme,
+  responsiveFontSizes,
+} from "@material-ui/core/styles";
 const Cart = React.lazy(() => import("./components/cart/cart"));
+
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -35,10 +41,32 @@ const StyledContainer = withStyles((theme) => ({
   },
 }))(Container);
 
+
+
 function App() {
   const classes = useStyles();
+  let theme = createMuiTheme({
+    "@global": {},
+    breakpoints: {
+      values: {
+        xsmall: 800,
+        small: 1280,
+        medium: 1440,
+        large: 1920,
+      },
+    },
+
+    typography: {
+      fontSize: "12px",
+      color: "black",
+      fontFamily: "Gotham A,Gotham B",
+    },
+
+  });
+  theme = responsiveFontSizes(theme);
   return (
     <BrowserRouter>
+    <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <NavBar />
         <main className={classes.content}>
@@ -59,6 +87,7 @@ function App() {
           </StyledContainer>
         </main>
       </div>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

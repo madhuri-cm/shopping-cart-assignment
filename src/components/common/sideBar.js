@@ -4,6 +4,10 @@ import FormControl from "@material-ui/core/FormControl";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import { makeStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import Drawer from "@material-ui/core/Drawer";
+
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -21,7 +25,36 @@ const useStyles = makeStyles((theme) => ({
   selectedsidebar: {
       background: "rgb(201, 200, 200)"
 
-  }
+  },
+  drawer: {
+    [theme.breakpoints.up("xsmall")]: {
+      width: "200px",
+    },
+    [theme.breakpoints.up("small")]: {
+      width: "230px",
+    },
+    [theme.breakpoints.up("medium")]: {
+      width: "230px",
+    },
+    [theme.breakpoints.up("large")]: {
+      width: "300px",
+    },
+    flexShrink: 0,
+  },
+  navigationContainer: {
+    height: `calc(100% - 60px)`,
+    padding: "6% 6% 0% 6%",
+  },
+  navigationMenuContainer: {
+    height: `calc(100% - 60px)`,
+  },
+  list: {
+    width: "100%",
+  },
+  listItem: {
+    height: "35px",
+    padding: "0px 0px 0px 7px",
+  },
 
 }));
 
@@ -29,25 +62,34 @@ function Sidebar(props) {
   const classes = useStyles();
   const [category, setcategory] = React.useState("");
   const onselectionchange = (e) => {
-    console.log(e.target.id || e.target.value);
     const tempcategory = e.target.id || e.target.value || "";
     props.eventhandler(
       category === (e.target.id || e.target.value) ? "" : tempcategory
     );
-    console.log(category === (e.target.id || e.target.value));
     category === (e.target.id || e.target.value)
       ? setcategory("")
       : setcategory(e.target.id || e.target.value);
   };
   return (
-    <div>
-      <div >
+    <Drawer
+    className={classes.drawer}
+    variant="permanent"
+    classes={{
+      paper: classes.drawerPaper,
+    }}
+    >
+    <div className={classes.navigationContainer}>
+      <div className={classes.navigationMenuContainer}>
+        <List 
+          component="nav"
+          aria-labelledby="nested-list-subheader"
+          className={classes.list}
+        >
         {props.categories.map((element) => (
-          <div
+          <ListItem
             id={element.id}
             key={element.id}
             value={element.id}
-            //style={category === element.id && { background: "grey" }}
             className={
              classes.sidebaritem +
               (category === element.id ? classes.selectedsidebar : "")
@@ -55,30 +97,13 @@ function Sidebar(props) {
             onClick={(e) => onselectionchange(e)}
           >
             {element.name}
-          </div>
+          </ListItem>
         ))}
+        </List>
       </div>
-      <div className="sidedropdown">
-        <FormControl variant="outlined" className={classes.formControl}>
-          <InputLabel id="demo-simple-select-outlined-label">
-            Select Category
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-outlined-label"
-            id="demo-simple-select-outlined"
-            value={category}
-            onChange={onselectionchange}
-            label="Select"
-          >
-            {props.categories.map((element) => (
-              <MenuItem key={element.id} value={element.id}>
-                {element.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </div>
+
     </div>
+    </Drawer>
   );
 }
 
