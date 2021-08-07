@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import "./cart.css"
+
 import {
   changecartstatus,
   addtocart,
@@ -10,6 +10,63 @@ import {
 } from "../../redux/cart/cartAction"
 import Modal from "@material-ui/core/Modal";
 import Eachcartitem from "./singleCartItem"
+import { makeStyles } from "@material-ui/core";
+
+
+const useStyles = makeStyles((theme) => ({
+  modalContainer: {
+    position: "absolute",
+    width: "400px",
+    minHeight: "80%",
+    maxHeight: "85%",
+    height: "auto",
+    backgroundColor: "#FFFFFF",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    border: "none",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between"
+  },
+  cartHeader: {
+    padding: "1rem",
+    backgroundColor: "black",
+    color: "white"
+  },
+  cartProductsContainer: {
+    padding: "0.5rem",
+    flex: 1,
+    backgroundColor: "#8080801a",
+    overflow: "auto"
+  },
+  emptycarttext: {
+    textAlign: "center"
+  },
+  startshopping: {
+    width: "100%",
+    padding: "1rem 0",
+    backgroundColor: "#d90166",
+    textAlign: "center"
+  },
+  banner: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    padding: "0.5rem",
+    backgroundColor: "white",
+    marginTop: "0.5rem"
+  },
+  checkout: {
+    background: "#e75480",
+    color: "white",
+    padding: "1rem",
+    display: "flex",
+    justifyContent: "space-between"
+  }
+  
+
+}))
 
 function Cart({
   cartproductsData,
@@ -18,6 +75,7 @@ function Cart({
   removefromCart,
   fetchCartproducts,
 }) {
+  const classes = useStyles()
     useEffect(() => {
         fetchCartproducts()
 
@@ -37,21 +95,21 @@ function Cart({
 
   return (
     <div>
-      {console.log(fetchCartproducts, "cart")}
+      
       <Modal
         open={cartproductsData.cartopen}
         onClose={() => changecartStatus()}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        <div className="modalcontainer">
+        <div className={classes.modalContainer}>
           <div>
-            <h3>My Cart ({itemnumber} item)</h3>
+            <h3 className={classes.cartHeader}>My Cart (<span></span>{itemnumber} item)</h3>
           </div>
-          {cartproductsData.cartproducts.filter((item) => item.count).length ? (
+          {cartproductsData.cartproducts.map((item) => item.count).length ? (
             <>
               {" "}
-              <div className="allcartproducts">
+              <div className={classes.cartProductsContainer}>
                 {cartproductsData.cartproducts
                   .filter((item) => item.count)
                   .map((item) => (
@@ -62,8 +120,8 @@ function Cart({
                       removefromcart={() => removefromCart(item)}
                     />
                   ))}
-                <div className="lowestpricebanner">
-                  <img src="/static/images/lowest-price.png" />
+                <div className={classes.banner}>
+                  <img src="/static/images/lowest-price.png" alt={"price"} />
                   <small>You won't find cheaper anywhere</small>
                 </div>
               </div>
@@ -71,7 +129,7 @@ function Cart({
                 <div style={{ textAlign: "center", padding: "0.5rem" }}>
                   <small>Promo code can be applied on payment page</small>
                 </div>
-                <div className="checkout">
+                <div className={classes.checkout}>
                   <small>Proceed to Checkout</small>
                   <small>Rs.{checkoutprice}</small>
                 </div>
@@ -79,11 +137,11 @@ function Cart({
             </>
           ) : (
             <>
-              <div className="emptycarttext">
+              <div className={classes.emptycarttext}>
                 <h4>No items in your cart</h4>
                 <small>Your favourite items are just a click away</small>
               </div>
-              <div className="startshopping" onClick={() => changecartStatus()}>
+              <div className={classes.startshopping} onClick={() => changecartStatus()}>
                 <Link to="/" style={{ textDecoration: "none", color: "white" }}>
                   Start Shopping
                 </Link>

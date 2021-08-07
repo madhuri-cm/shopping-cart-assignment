@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import signupPage from "./components/userAuth/register";
+import LoginPage from "./components/userAuth/login";
 import NavBar from "./components/common/navBar";
 import React, { useEffect, Suspense } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
@@ -19,25 +20,27 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     height: `calc(100% - 50px)`,
     overflow: "auto",
-    borderRadius: 5,
     transform: `translate(0, 50px)`,
     backgroundColor: "#FFFFFF",
   },
   container: {
     width: "100%",
-    height: "calc(100% - 50px)",
+    height: "100%",
+    overflow: "auto"
   },
   root: {
     display: "flex",
     background: "#FFFFFF",
     opacity: 1,
-    height: "100vh",
-    width: "100vw",
+    maxHeight: "100vh",
+    maxWidth: "100vw",
   },
 }));
 const StyledContainer = withStyles((theme) => ({
   root: {
     padding: "0px",
+    width: "100%",
+    height: `calc(100% - 60px)`
   },
 }))(Container);
 
@@ -46,6 +49,7 @@ const StyledContainer = withStyles((theme) => ({
 function App() {
   const classes = useStyles();
   let theme = createMuiTheme({
+
     "@global": {},
     breakpoints: {
       values: {
@@ -73,6 +77,7 @@ function App() {
           <StyledContainer className={classes.container}>
             <Switch>
               <Route path="/signup" component={signupPage} />
+              <Route path="/login" component={LoginPage} />
               <Route path="/home" component={Home} />
               <Route path="/products" component={Productlandingpage} />
               <Route path="/Cart" component={Cart} />

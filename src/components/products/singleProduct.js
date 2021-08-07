@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Snackbar from "@material-ui/core/Snackbar";
 
 import { makeStyles } from "@material-ui/core/styles";
+import { ButtonWithText } from "../common/button";
+
 
 
 
@@ -76,28 +78,24 @@ function SingleProduct(props) {
       <div className={classes.description}>{props.product.description}</div>
       <div className={classes.price}>
         <span>MRP Rs.{props.product.price}</span>
-        <button
-          onClick={() => {
-            setopen(true);
-            props.addtocart();
-          }}
-        >
-          Buy Now
-        </button>
+        <ButtonWithText 
+        dispText="Buy Now"
+        color="#FFFFFF"
+        backgroundColor="#d90166"
+        borderColor="#d90166"
+        borderRadius="1px"
+        height= "30px"
+        fontSize="15px"
+        onClick={() => {
+          setopen(true);
+          props.addtocart();
+        }}
+
+        
+        />
+
       </div>
-      <div className={classes.root}>
-        <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
-          <div
-            style={{
-              background: "green",
-              padding: "0.2rem 0.5rem",
-              color: "white",
-            }}
-          >
-            <h1>Product added to cart</h1>
-          </div>
-        </Snackbar>
-      </div>
+
     </div>
   );
 }

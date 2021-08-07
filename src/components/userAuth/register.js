@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
   mainContainer: {
     display: "flex",
-    width: "100%",
+    maxWidth: "100%",
     height: `calc(100% - 50px)`,
     padding: "10px",
     marginTop: "20px",

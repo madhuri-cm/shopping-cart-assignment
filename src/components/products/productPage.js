@@ -6,10 +6,12 @@ import { fetchProducts } from  "../../redux/product/productAction"
 import { fetchCategories } from "../../redux/category/categoryAction";
 import { makeStyles } from "@material-ui/core";
 
+
 const useStyles = makeStyles((theme) => ({
     mainContainer: {
-        minHeight: `calc(100vh - 132px)`,
-        background: "#c4c2c23b",
+        height: `calc(100vh - 60px)`,
+        
+        backgroundColor: "#FFFFFF",
         display: "grid",
         gridTemplateColumns: "25% 75%"
     }
@@ -27,11 +29,10 @@ function Productlandingpage({
 
   useEffect(() => {
     fetchCategories();
-  }, []);
-
-  useEffect(() => {
     fetchProducts();
   }, []);
+
+ 
 
   const eventhandler = (data) => {
     const filtereddata = data
@@ -42,7 +43,6 @@ function Productlandingpage({
   };
   return (
     <div className={classes.mainContainer}>
-      {console.log(productsData, "brooooooooo", categoriesData)}
       <Sidebar
         categories={categoriesData.categories}
         className="selectionbar"

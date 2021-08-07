@@ -18,15 +18,19 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   sidebaritem: {
-      padding: "1rem",
-      borderBottom: "1 px solid grey",
-      cursor: "pointer"
+      borderBottom: "0.5px solid black",
+      cursor: "pointer",
+      fontSize: "18px"
   },
   selectedsidebar: {
-      background: "rgb(201, 200, 200)"
+      borderBottom: "0.5px solid black",
+      cursor: "pointer",
+      fontSize: "14px"
+
 
   },
   drawer: {
+
     [theme.breakpoints.up("xsmall")]: {
       width: "200px",
     },
@@ -54,6 +58,28 @@ const useStyles = makeStyles((theme) => ({
   listItem: {
     height: "35px",
     padding: "0px 0px 0px 7px",
+  },
+  drawerPaper: {
+    backgroundColor: "#d1D3D4",
+    color: "black",
+    [theme.breakpoints.up("xsmall")]: {
+      width: "200px",
+      fontSize: "10px",
+    },
+    [theme.breakpoints.up("small")]: {
+      width: "230px",
+      fontSize: "12px",
+    },
+    [theme.breakpoints.up("medium")]: {
+      width: "230px",
+      fontSize: "14px",
+    },
+    [theme.breakpoints.up("large")]: {
+      width: "300px",
+      fontSize: "14px",
+    },
+    borderRight: "none",
+    boxShadow: "0px 4px 4px #D8D8D9",
   },
 
 }));
@@ -91,8 +117,8 @@ function Sidebar(props) {
             key={element.id}
             value={element.id}
             className={
-             classes.sidebaritem +
-              (category === element.id ? classes.selectedsidebar : "")
+              (category === element.id) ? classes.sidebaritem : classes.selectedsidebar
+
             }
             onClick={(e) => onselectionchange(e)}
           >
