@@ -99,8 +99,8 @@ function Cart({
       <Modal
         open={cartproductsData.cartopen}
         onClose={() => changecartStatus()}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
+        // aria-labelledby="simple-modal-title"
+        // aria-describedby="simple-modal-description"
       >
         <div className={classes.modalContainer}>
           <div>

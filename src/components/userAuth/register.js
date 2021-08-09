@@ -32,17 +32,8 @@ const CustomTextField = withStyles({
     "& .MuiInput-underline:after": {
       borderBottomColor: "#7AD7F0",
     },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "red",
-      },
-      "&:hover fieldset": {
-        borderColor: "yellow",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "green",
-      },
-    },
+
+    
   },
 })(TextField);
 

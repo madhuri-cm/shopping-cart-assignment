@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import Snackbar from "@material-ui/core/Snackbar";
-
 import { makeStyles } from "@material-ui/core/styles";
 import { ButtonWithText } from "../common/button";
 
@@ -45,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
     padding: "0.5rem",
     height: "80px",
     overflow:"hidden",
-    height: "58px"
 
   }
 
@@ -55,10 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 function SingleProduct(props) {
   const classes = useStyles();
-  const [open, setopen] = useState(false);
-  const handleClose = () => {
-    setopen(false);
-  };
+
   const Container = styled.div`
     background-image: url(${props.product.imageURL});
     background-repeat: no-repeat;
@@ -87,7 +81,6 @@ function SingleProduct(props) {
         height= "30px"
         fontSize="15px"
         onClick={() => {
-          setopen(true);
           props.addtocart();
         }}
 

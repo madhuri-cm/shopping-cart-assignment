@@ -2,8 +2,6 @@ import React from "react"
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
@@ -18,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         height: 50,
-        paddingLeft: theme.spacing.unit * 4,
         backgroundColor: theme.palette.background.default
       },
       img: {
@@ -60,16 +57,16 @@ const SingleBanner = (props) => {
           variant="text"
           activeStep={activeStep}
           nextButton={
-            <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
+            <button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
               Next
               {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-            </Button>
+            </button>
           }
           backButton={
-            <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+            <button size="small" onClick={handleBack} disabled={activeStep === 0}>
               {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
               Back
-            </Button>
+            </button>
           }
         />
       </div>

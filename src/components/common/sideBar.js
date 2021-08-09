@@ -1,8 +1,4 @@
-import React, { useState } from "react";
-import Select from "@material-ui/core/Select";
-import FormControl from "@material-ui/core/FormControl";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -108,10 +104,10 @@ function Sidebar(props) {
       <div className={classes.navigationMenuContainer}>
         <List 
           component="nav"
-          aria-labelledby="nested-list-subheader"
           className={classes.list}
         >
         {props.categories.map((element) => (
+          <List key={element.id}>
           <ListItem
             id={element.id}
             key={element.id}
@@ -124,6 +120,7 @@ function Sidebar(props) {
           >
             {element.name}
           </ListItem>
+          </List>
         ))}
         </List>
       </div>

@@ -1,15 +1,15 @@
-import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import signupPage from "./components/userAuth/register";
 import LoginPage from "./components/userAuth/login";
 import NavBar from "./components/common/navBar";
-import React, { useEffect, Suspense } from "react";
+import React, { Suspense } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Home from "./components/home/homePage";
 import Productlandingpage from "./components/products/productPage";
 import {
   ThemeProvider,
-  createMuiTheme,
+  createTheme,
   responsiveFontSizes,
 } from "@material-ui/core/styles";
 const Cart = React.lazy(() => import("./components/cart/cart"));
@@ -48,7 +48,7 @@ const StyledContainer = withStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
-  let theme = createMuiTheme({
+  let theme = createTheme({
 
     "@global": {},
     breakpoints: {
@@ -61,7 +61,7 @@ function App() {
     },
 
     typography: {
-      fontSize: "12px",
+      fontSize: 12,
       color: "black",
       fontFamily: "Gotham A,Gotham B",
     },

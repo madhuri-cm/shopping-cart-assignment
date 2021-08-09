@@ -1,25 +1,12 @@
-import React, {Fragment} from "react"
+import React, { Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import {
-  
-  TextField,
-  Typography,
-  FormControl,
-} from "@material-ui/core";
-import {
-
-  withStyles,
-  makeStyles,
- 
-} from "@material-ui/core/styles";
-import { ButtonWithText } from "../common/button"
-import {connect} from "react-redux"
+import { TextField, Typography, FormControl } from "@material-ui/core";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { ButtonWithText } from "../common/button";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-
-
-
 
 const CustomTextField = withStyles({
   root: {
@@ -32,23 +19,11 @@ const CustomTextField = withStyles({
     "& .MuiInput-underline:after": {
       borderBottomColor: "#7AD7F0",
     },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "red",
-      },
-      "&:hover fieldset": {
-        borderColor: "yellow",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "green",
-      },
-    },
+
   },
 })(TextField);
 
 const useStyles = makeStyles((theme) => ({
-
-
   mainContainer: {
     display: "flex",
     maxWidth: "100%",
@@ -73,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
   formContainer: {
     justifyContent: "center",
     width: "40%",
-
   },
   inputContainer: {
     width: "300px",
@@ -89,15 +63,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LoginPage = (props) => {
-  console.log(props)
+  console.log(props);
   const classes = useStyles();
 
   const validationSchema = Yup.object().shape({
-
-
     email: Yup.string().required("Email is required").email("Email is invalid"),
-
-    
   });
 
   const {
@@ -109,11 +79,7 @@ const LoginPage = (props) => {
   });
 
   const onSubmit = (data) => {
-
-    props.history.push('/home')
-
-    
-   
+    props.history.push("/home");
   };
 
   return (
@@ -122,13 +88,11 @@ const LoginPage = (props) => {
         <div className={classes.textContainer}>
           <Typography className={classes.signupHeader}>Login</Typography>
           <Typography className={classes.signupText}>
-           Get Access to your Orders, Wishlist and Recommendations
+            Get Access to your Orders, Wishlist and Recommendations
           </Typography>
         </div>
 
         <div className={classes.formContainer}>
- 
-
           <FormControl className={classes.inputContainer}>
             <CustomTextField
               required
@@ -152,18 +116,17 @@ const LoginPage = (props) => {
           </FormControl>
 
           <div className={classes.signupButton}>
-          <ButtonWithText 
-                dispText="Signup"
-                color="#FFFFFF"
-                backgroundColor="#d90166"
-                borderColor="#d90166"
-                borderRadius="1px"
-                height= "30px"
-                fontSize="15px"
-                width="100%"
-                onClick={handleSubmit(onSubmit)}
-                />
- 
+            <ButtonWithText
+              dispText="Signup"
+              color="#FFFFFF"
+              backgroundColor="#d90166"
+              borderColor="#d90166"
+              borderRadius="1px"
+              height="30px"
+              fontSize="15px"
+              width="100%"
+              onClick={handleSubmit(onSubmit)}
+            />
           </div>
         </div>
       </div>
@@ -171,4 +134,4 @@ const LoginPage = (props) => {
   );
 };
 
-export default withRouter(connect()(LoginPage))
+export default withRouter(connect()(LoginPage));
