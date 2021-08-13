@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
 import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Drawer from "@material-ui/core/Drawer";
+import { useMediaQuery } from "@material-ui/core";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -13,120 +16,77 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  sidebar: {
+    display:(media)=>(media.sm && "none")
+  },
   sidebaritem: {
-      borderBottom: "0.5px solid black",
-      cursor: "pointer",
-      fontSize: "18px"
-  },
-  selectedsidebar: {
-      borderBottom: "0.5px solid black",
-      cursor: "pointer",
-      fontSize: "14px"
-
+    padding: "1rem",
+    borderBottom: "1px solid grey",
+    cursor: "pointer"
 
   },
-  drawer: {
+  sidedropdown: {
+    display: (media)=>(media.sm ? "block": "none")
 
-    [theme.breakpoints.up("xsmall")]: {
-      width: "200px",
-    },
-    [theme.breakpoints.up("small")]: {
-      width: "230px",
-    },
-    [theme.breakpoints.up("medium")]: {
-      width: "230px",
-    },
-    [theme.breakpoints.up("large")]: {
-      width: "300px",
-    },
-    flexShrink: 0,
-  },
-  navigationContainer: {
-    height: `calc(100% - 60px)`,
-    padding: "6% 6% 0% 6%",
-  },
-  navigationMenuContainer: {
-    height: `calc(100% - 60px)`,
-  },
-  list: {
-    width: "100%",
-  },
-  listItem: {
-    height: "35px",
-    padding: "0px 0px 0px 7px",
-  },
-  drawerPaper: {
-    backgroundColor: "#d1D3D4",
-    color: "black",
-    [theme.breakpoints.up("xsmall")]: {
-      width: "200px",
-      fontSize: "10px",
-    },
-    [theme.breakpoints.up("small")]: {
-      width: "230px",
-      fontSize: "12px",
-    },
-    [theme.breakpoints.up("medium")]: {
-      width: "230px",
-      fontSize: "14px",
-    },
-    [theme.breakpoints.up("large")]: {
-      width: "300px",
-      fontSize: "14px",
-    },
-    borderRight: "none",
-    boxShadow: "0px 4px 4px #D8D8D9",
-  },
-
+  }
 }));
 
 function Sidebar(props) {
-  const classes = useStyles();
+  const matches_sm = useMediaQuery("(max-width:600px)");
+
+  const classes = useStyles({ sm: matches_sm });
   const [category, setcategory] = React.useState("");
   const onselectionchange = (e) => {
+    console.log(e.target.id || e.target.value);
     const tempcategory = e.target.id || e.target.value || "";
     props.eventhandler(
       category === (e.target.id || e.target.value) ? "" : tempcategory
     );
+    console.log(category === (e.target.id || e.target.value));
     category === (e.target.id || e.target.value)
       ? setcategory("")
       : setcategory(e.target.id || e.target.value);
   };
   return (
-    <Drawer
-    className={classes.drawer}
-    variant="permanent"
-    classes={{
-      paper: classes.drawerPaper,
-    }}
-    >
-    <div className={classes.navigationContainer}>
-      <div className={classes.navigationMenuContainer}>
-        <List 
-          component="nav"
-          className={classes.list}
-        >
+    <div>
+      <div className={classes.sidebar}>
         {props.categories.map((element) => (
-          <List key={element.id}>
-          <ListItem
+          <div
             id={element.id}
             key={element.id}
             value={element.id}
+            //style={category === element.id && { background: "grey" }}
             className={
-              (category === element.id) ? classes.sidebaritem : classes.selectedsidebar
-
+              classes.sidebaritem +
+              (category === element.id ?  classes.selectedsidebar : "")
             }
             onClick={(e) => onselectionchange(e)}
           >
             {element.name}
-          </ListItem>
-          </List>
+          </div>
         ))}
-        </List>
       </div>
-
+      <div className={classes.sidedropdown}>
+        <FormControl variant="outlined" className={classes.formControl}>
+          <InputLabel id="demo-simple-select-outlined-label">
+            Select Category
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-outlined-label"
+            id="demo-simple-select-outlined"
+            value={category}
+            onChange={onselectionchange}
+            label="Select"
+          >
+            {props.categories.map((element) => (
+              <MenuItem key={element.id} value={element.id}>
+                {element.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
     </div>
-    </Drawer>
   );
 }
 

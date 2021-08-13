@@ -17,6 +17,7 @@ import {
 import { ButtonWithText } from "../common/button"
 import {connect} from "react-redux"
 import { withRouter } from "react-router-dom";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 
 
@@ -41,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 
   mainContainer: {
-    display: "flex",
+    display: (media) => (media.sm ? "block" : "flex"),
     maxWidth: "100%",
     height: `calc(100% - 50px)`,
     padding: "10px",
@@ -80,9 +81,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUpPage = (props) => {
-  console.log(props)
-  const classes = useStyles();
+  const matches_sm = useMediaQuery("(max-width:600px)");
 
+  const classes = useStyles({sm:matches_sm});
   const validationSchema = Yup.object().shape({
     firstname: Yup.string().required("Firstname is required")
     .min(6, "Firstname must be at least 6 characters")

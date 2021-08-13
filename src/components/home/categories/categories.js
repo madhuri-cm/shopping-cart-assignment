@@ -17,10 +17,11 @@ const Categories = (props) => {
     <div>
         {
             props.categories && props.categories.categories &&
-            props.categories.categories.map((cat) => (
+            props.categories.categories.map((cat, index) => (
                 <SingleCategory 
                 data={cat}
                 key={cat.name}
+                reverse={index % 2 === 0}
                 />
             ))
         }

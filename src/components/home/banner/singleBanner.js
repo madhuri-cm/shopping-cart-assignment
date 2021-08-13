@@ -5,6 +5,9 @@ import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import { useMediaQuery } from "@material-ui/core";
+
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -19,17 +22,19 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.default
       },
       img: {
-        height: "255px",
+        height: (media) => (media.sm ? 150 : 350),
         display: "block",
         maxWidth: "100%",
         overflow: "hidden",
-        width: "100%"
+        width: "100%",
+        objectFit: "contain"
       }
   }));
   
 const SingleBanner = (props) => {
-    console.log(props)
-    const classes = useStyles();
+  const matches_sm = useMediaQuery("(max-width:400px)");
+
+  const classes = useStyles({sm:matches_sm});
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
     const maxSteps = props.banner.length;

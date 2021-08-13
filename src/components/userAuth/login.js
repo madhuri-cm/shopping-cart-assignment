@@ -7,6 +7,7 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { ButtonWithText } from "../common/button";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const CustomTextField = withStyles({
   root: {
@@ -25,7 +26,7 @@ const CustomTextField = withStyles({
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
-    display: "flex",
+    display: (media) => (media.sm ? "block" : "flex"),
     maxWidth: "100%",
     height: `calc(100% - 50px)`,
     padding: "10px",
@@ -63,8 +64,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LoginPage = (props) => {
-  console.log(props);
-  const classes = useStyles();
+  const matches_sm = useMediaQuery("(max-width:600px)");
+
+  const classes = useStyles({sm:matches_sm});
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),

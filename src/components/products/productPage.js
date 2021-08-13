@@ -4,7 +4,7 @@ import Products from "../products/products";
 import { connect } from "react-redux";
 import { fetchProducts } from  "../../redux/product/productAction"
 import { fetchCategories } from "../../redux/category/categoryAction";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, useMediaQuery } from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -12,8 +12,9 @@ const useStyles = makeStyles((theme) => ({
         height: `calc(100vh - 60px)`,
         
         backgroundColor: "#FFFFFF",
-        display: "grid",
-        gridTemplateColumns: "25% 75%"
+        display: (media) => (media.sm ? "block" : "grid"),
+        gridTemplateColumns: "25% 75%",
+        marginTop: "50px"
     }
 }))
 
@@ -23,7 +24,9 @@ function Productlandingpage({
   fetchCategories,
   fetchProducts,
 }) {
-    const classes = useStyles()
+  const matches_sm = useMediaQuery("(max-width:600px)");
+
+  const classes = useStyles({ sm: matches_sm });
   const [currentproducts, setcurrentproducts] = useState([]);
   const [rerender, setrerender] = useState(false);
 

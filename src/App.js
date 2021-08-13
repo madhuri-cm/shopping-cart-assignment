@@ -12,13 +12,15 @@ import {
   createTheme,
   responsiveFontSizes,
 } from "@material-ui/core/styles";
+import "./App.css"
 const Cart = React.lazy(() => import("./components/cart/cart"));
+
 
 
 const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
-    height: `calc(100% - 50px)`,
+    height: `calc(100% - 80px)`,
     overflow: "auto",
     transform: `translate(0, 50px)`,
     backgroundColor: "#FFFFFF",
@@ -63,7 +65,7 @@ function App() {
     typography: {
       fontSize: 12,
       color: "black",
-      fontFamily: "Gotham A,Gotham B",
+      fontFamily: "Dosis"
     },
 
   });

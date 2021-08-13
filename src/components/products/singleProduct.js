@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
 import { ButtonWithText } from "../common/button";
+import { useMediaQuery } from "@material-ui/core";
 
 
 
@@ -14,7 +15,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   mainContainer: {
-      width: "200px",
+      width: (media) => (media.sm ? "auto" : "200px"),
+      objectFit: "contain",
       borderBottom: "1px solid #00000029",
       padding: "0.5rem"
   },
@@ -51,8 +53,9 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 function SingleProduct(props) {
-  const classes = useStyles();
+  const matches_sm = useMediaQuery("(max-width:600px)");
 
+  const classes = useStyles({ sm: matches_sm });
   const Container = styled.div`
     background-image: url(${props.product.imageURL});
     background-repeat: no-repeat;

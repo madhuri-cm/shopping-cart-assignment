@@ -1,21 +1,25 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, useMediaQuery } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
 import { addtocart } from "../../redux/cart/cartAction"
 import SingleProduct from "./singleProduct"
 
+
 const useStyles = makeStyles((theme) => ({
     mainContainer: {
         display: "flex",
         flexWrap: "wrap",
-        justifyContent: "space-between",
-        background: "white"
+        justifyContent: (media) => (media.sm ? "center" : "space-between"),
+        background: "white",
+        paddingTop: "20px"
     }
 
 }))
 
 function Products(props) {
- const classes = useStyles()
+  const matches_sm = useMediaQuery("(max-width:600px)");
+
+  const classes = useStyles({ sm: matches_sm });
   return (
     <>
       {props.products.length ? (
