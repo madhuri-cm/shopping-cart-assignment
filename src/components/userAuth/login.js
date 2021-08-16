@@ -119,7 +119,7 @@ const LoginPage = (props) => {
 
           <div className={classes.signupButton}>
             <ButtonWithText
-              dispText="Signup"
+              dispText="Login"
               color="#FFFFFF"
               backgroundColor="#d90166"
               borderColor="#d90166"

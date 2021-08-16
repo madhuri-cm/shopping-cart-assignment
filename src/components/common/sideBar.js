@@ -17,7 +17,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   sidebar: {
-    display:(media)=>(media.sm && "none")
+    display:(media)=>(media.sm && "none"),
+    backgroundColor: "#E5E5E5",
+    height: "100%"
   },
   sidebaritem: {
     padding: "1rem",

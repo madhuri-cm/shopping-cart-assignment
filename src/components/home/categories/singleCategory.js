@@ -38,8 +38,8 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0px 8px 11px 0px #00000014",
   },
   media: {
-    height: (media) => (media.sm ? 150 : 250),
-    width: (media) => (media.sm ? 150 : 250)
+    height: (media) => (media.sm ? 125 : 250),
+    width: (media) => (media.sm ? 200 : 400)
   },
   cardAction: {
     textAlign: "center",

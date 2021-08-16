@@ -8,13 +8,13 @@ import { makeStyles, useMediaQuery } from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
-    mainContainer: {
-        height: `calc(100vh - 60px)`,
-        
+    mainContainer: {      
         backgroundColor: "#FFFFFF",
         display: (media) => (media.sm ? "block" : "grid"),
         gridTemplateColumns: "25% 75%",
-        marginTop: "50px"
+        marginTop: "50px",
+
+
     }
 }))
 
