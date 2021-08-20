@@ -3,35 +3,12 @@ import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
-import { makeStyles } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
+import {useStyles} from "./sidebarStyles"
 
 
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    width: "96%",
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-  sidebar: {
-    display:(media)=>(media.sm && "none"),
-    backgroundColor: "#E5E5E5",
-    height: "100%"
-  },
-  sidebaritem: {
-    padding: "1rem",
-    borderBottom: "1px solid grey",
-    cursor: "pointer"
 
-  },
-  sidedropdown: {
-    display: (media)=>(media.sm ? "block": "none")
-
-  }
-}));
 
 function Sidebar(props) {
   const matches_sm = useMediaQuery("(max-width:600px)");

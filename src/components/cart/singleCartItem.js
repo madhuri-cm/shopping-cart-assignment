@@ -2,45 +2,13 @@ import React from "react";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 import CloseIcon from "@material-ui/icons/Close";
-import { makeStyles } from "@material-ui/core";
+import {useStyles} from "./singleCartItemStyles";
 
 
 
 
-const useStyles = makeStyles((theme) => ({
-  cartItem: {
-    height: "80px",
-    display: "flex",
-    padding: "0.3rem",
-    backgroundColor: "white",
-    marginBottom: "0.5rem"
-  },
-  cartImage: {
-    width: "80px"
-  },
-  productDetails: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-evenly"
-  },
-  itemcontainer: {
-    display: "flex",
-    alignItems: "center"
-  },
-  iconcontainer: {
-    display: "flex",
-    alignItems: "center",
-    flex: "2",
-    justifyContent: "space-between"
-  },
-  itemprice: {
-    flex: 1,
-    display: "flex",
-    justifContent: "flex-end"
-  }
 
-}))
+
 function Eachcartitem({ item, addtocart, removefromcart }) {
   const classes = useStyles()
   return (
@@ -52,16 +20,24 @@ function Eachcartitem({ item, addtocart, removefromcart }) {
         <h5>{item.name}</h5>
         <div className={classes.itemcontainer}>
           <div className={classes.iconcontainer}>
+            <div className={classes.icons}>
             <RemoveCircleIcon
               style={{ color: "#d90166" }}
               onClick={() => removefromcart()}
             />
+            </div>
+            
+
             {item.count}
+            <div className={classes.icons}>
             <AddCircleIcon
               style={{ color: "#d90166" }}
               onClick={() => addtocart()}
             />
-            <CloseIcon />
+            </div>
+            <div className={classes.icons}>
+            <CloseIcon onClick={() => removefromcart()} />
+            </div>
             <span> Rs.{item.price}</span>
           </div>
           <div className="itemprice">Rs. {item.price * item.count}</div>

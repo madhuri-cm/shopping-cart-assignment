@@ -4,19 +4,10 @@ import Products from "../products/products";
 import { connect } from "react-redux";
 import { fetchProducts } from  "../../redux/product/productAction"
 import { fetchCategories } from "../../redux/category/categoryAction";
-import { makeStyles, useMediaQuery } from "@material-ui/core";
+import {  useMediaQuery } from "@material-ui/core";
+import {useStyles} from "./productPageStyles"
 
 
-const useStyles = makeStyles((theme) => ({
-    mainContainer: {      
-        backgroundColor: "#FFFFFF",
-        display: (media) => (media.sm ? "block" : "grid"),
-        gridTemplateColumns: "25% 75%",
-        marginTop: "50px",
-
-
-    }
-}))
 
 function Productlandingpage({
   productsData,

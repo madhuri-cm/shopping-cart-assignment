@@ -1,96 +1,24 @@
-import React, {Fragment} from "react"
+import React, { Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import {
-  
-  TextField,
-  Typography,
-  FormControl,
-} from "@material-ui/core";
-import {
-
-  withStyles,
-  makeStyles,
- 
-} from "@material-ui/core/styles";
-import { ButtonWithText } from "../common/button"
-import {connect} from "react-redux"
+import { Typography, FormControl } from "@material-ui/core";
+import { ButtonWithText } from "../common/button";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-
-
-
-
-const CustomTextField = withStyles({
-  root: {
-    "& label.Mui-focused": {
-      color: "#7AD7F0",
-    },
-    "& .MuiInput-underline:hover": {
-      borderBottomColor: "#7AD7F0",
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "#7AD7F0",
-    },
-
-    
-  },
-})(TextField);
-
-const useStyles = makeStyles((theme) => ({
-
-
-  mainContainer: {
-    display: (media) => (media.sm ? "block" : "flex"),
-    maxWidth: "100%",
-    height: `calc(100% - 50px)`,
-    padding: "10px",
-    marginTop: "20px",
-    justifyContent: "center",
-  },
-  textContainer: {
-    marginTop: "20px",
-    marginRight: "30px",
-  },
-  signupHeader: {
-    fontSize: "20px",
-    fontWeight: 600,
-    marginBottom: "10px",
-  },
-  signupText: {
-    fontSize: "15px",
-    fontWeight: 500,
-  },
-  formContainer: {
-    justifyContent: "center",
-    width: "40%",
-
-  },
-  inputContainer: {
-    width: "300px",
-    marginBottom: "10px",
-  },
-  inputFieldContainer: {
-    width: "300px",
-  },
-  signupButton: {
-    width: "300px",
-    marginTop: "30px",
-  },
-}));
+import { useStyles, CustomTextField } from "./registerStyles";
 
 const SignUpPage = (props) => {
   const matches_sm = useMediaQuery("(max-width:600px)");
 
-  const classes = useStyles({sm:matches_sm});
+  const classes = useStyles({ sm: matches_sm });
   const validationSchema = Yup.object().shape({
-    firstname: Yup.string().required("Firstname is required")
-    .min(6, "Firstname must be at least 6 characters")
-    .max(20, "Firstname must not exceed 20 characters")
-    ,
-    lastname: Yup.string()
-      .required("Lastname is required"),
+    firstname: Yup.string()
+      .required("Firstname is required")
+      .min(6, "Firstname must be at least 6 characters")
+      .max(20, "Firstname must not exceed 20 characters"),
+    lastname: Yup.string().required("Lastname is required"),
 
     email: Yup.string().required("Email is required").email("Email is invalid"),
     password: Yup.string()
@@ -100,7 +28,6 @@ const SignUpPage = (props) => {
     confirmPassword: Yup.string()
       .required("Confirm Password is required")
       .oneOf([Yup.ref("password"), null], "Confirm Password does not match"),
-    
   });
 
   const {
@@ -112,11 +39,7 @@ const SignUpPage = (props) => {
   });
 
   const onSubmit = (data) => {
-
-    props.history.push('/login')
-
-    
-   
+    props.history.push("/login");
   };
 
   return (
@@ -131,7 +54,7 @@ const SignUpPage = (props) => {
 
         <div className={classes.formContainer}>
           <FormControl className={classes.inputContainer}>
-          <CustomTextField
+            <CustomTextField
               required
               id="firstname"
               name="firstname"
@@ -184,18 +107,17 @@ const SignUpPage = (props) => {
             />
           </FormControl>
           <div className={classes.signupButton}>
-          <ButtonWithText 
-                dispText="Signup"
-                color="#FFFFFF"
-                backgroundColor="#d90166"
-                borderColor="#d90166"
-                borderRadius="1px"
-                height= "30px"
-                fontSize="15px"
-                width="100%"
-                onClick={handleSubmit(onSubmit)}
-                />
- 
+            <ButtonWithText
+              dispText="Signup"
+              color="#FFFFFF"
+              backgroundColor="#d90166"
+              borderColor="#d90166"
+              borderRadius="1px"
+              height="30px"
+              fontSize="15px"
+              width="100%"
+              onClick={handleSubmit(onSubmit)}
+            />
           </div>
         </div>
       </div>
@@ -203,4 +125,4 @@ const SignUpPage = (props) => {
   );
 };
 
-export default withRouter(connect()(SignUpPage))
+export default withRouter(connect()(SignUpPage));
